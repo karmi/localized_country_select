@@ -142,7 +142,7 @@
 			:MC => 'Monako',
 			:MD => 'Moldavsko, republika',
 			:ME => 'Černá Hora',
-			:MF => 'Svatý Martin; [draft=contributed]',
+			:MF => 'Svatý Martin',
 			:MG => 'Madagaskar',
 			:MH => 'Marshallovy ostrovy',
 			:MK => 'Macedonia',
