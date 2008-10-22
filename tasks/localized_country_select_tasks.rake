@@ -76,8 +76,8 @@ TAIL
     
     # ----- Write the parsed values into file      ---------------------------------
     puts "\n... writing the output"
-    # TODO : Append new only if file exists
-    filename = File.join(File.dirname(__FILE__), '..', 'locale', "#{locale}.rb.new")
+    filename = File.join(File.dirname(__FILE__), '..', 'locale', "#{locale}.rb")
+    filename += '.NEW' if File.exists?(filename) # Append 'NEW' if file exists
     File.open(filename, 'w+') { |f| f << output }
     puts "\n---\nWritten values for the '#{locale}' into file: #{filename}\n"
     # ------------------------------------------------------------------------------
