@@ -28,6 +28,16 @@ module LocalizedCountrySelect
     def localized_countries_array
       I18n.translate(:countries).map { |key, value| [value, key.to_s.upcase] }.sort
     end
+    # Return array with codes and localized country names for array of country codes passed as argument
+    # == Example
+    #   priority_countries_array([:TW, :CN])
+    #   # => [ ['Taiwan', 'TW'], ['China', 'CN'] ]
+    def priority_countries_array(country_codes=[])
+      countries = I18n.translate(:countries)
+      out = []
+      country_codes.each { |code| out << [countries[code], code.to_s.upcase] }
+      out
+    end
   end
 end
 
@@ -38,6 +48,7 @@ module ActionView
 
       # Return select and option tags for the given object and method, using +localized_country_options_for_select+ 
       # to generate the list of option tags. Uses <b>country code</b>, not name as option +value+.
+      # Country codes listed as an array of symbols in +priority_countries+ argument will be listed first
       def localized_country_select(object, method, priority_countries = nil, options = {}, html_options = {})
         InstanceTag.new(object, method, self, options.delete(:object)).
           to_localized_country_select_tag(priority_countries, options, html_options)
@@ -45,11 +56,11 @@ module ActionView
 
       # Returns a string of option tags for countries according to locale. Supply the country code in upper-case ('US', 'DE') 
       # as +selected+ to have it marked as the selected option tag.
-      # TODO : You can also supply an array of countries as +priority_countries+, so that they will be listed first.
+      # Country codes listed as an array of symbols in +priority_countries+ argument will be listed first
       def localized_country_options_for_select(selected = nil, priority_countries = nil)
         country_options = ""
         if priority_countries
-          country_options += options_for_select(priority_countries, selected)
+          country_options += options_for_select(LocalizedCountrySelect::priority_countries_array(priority_countries), selected)
           country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n"
         end
         return country_options + options_for_select(LocalizedCountrySelect::localized_countries_array, selected)

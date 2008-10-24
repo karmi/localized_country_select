@@ -32,6 +32,11 @@ class LocalizedCountrySelectTest < Test::Unit::TestCase
     assert localized_country_select(:user, :country) =~ Regexp.new(Regexp.escape('<option value="ES">Španělsko</option>'))
   end
 
+  def test_should_return_priority_countries_first
+    assert localized_country_options_for_select(nil, [:ES, :CZ]) =~ Regexp.new(
+      Regexp.escape("<option value=\"ES\">Spain</option>\n<option value=\"CZ\">Czech Republic</option><option value=\"\" disabled=\"disabled\">-------------</option>\n<option value=\"AF\">Afghanistan</option>\n"))
+  end
+
   def test_i18n_should_know_about_countries
     assert_equal 'Spain', I18n.t('ES', :scope => 'countries')
     I18n.locale = 'cz'
@@ -47,6 +52,12 @@ class LocalizedCountrySelectTest < Test::Unit::TestCase
     I18n.locale = 'cz'
     assert_equal 250, LocalizedCountrySelect::localized_countries_array.size
     assert_equal 'Afghánistán', LocalizedCountrySelect::localized_countries_array.first[0]
+  end
+
+  def test_priority_countries_returns_correctly_and_in_correct_order
+    assert_nothing_raised { LocalizedCountrySelect::priority_countries_array([:TW, :CN]) }
+    I18n.locale = 'en-US'
+    assert_equal [ ['Taiwan', 'TW'], ['China', 'CN'] ], LocalizedCountrySelect::priority_countries_array([:TW, :CN])
   end
 
   private
