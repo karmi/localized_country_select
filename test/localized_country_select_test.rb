@@ -64,6 +64,8 @@ class LocalizedCountrySelectTest < Test::Unit::TestCase
 
   def setup
     ['cz', 'en-US'].each do |locale|
+      # NOTE : Beware, that this is the old way of loading locale for current gem version,
+      #        Rails version uses the <tt>I18n.load_path += []</tt> way
       I18n.load_translations( File.join(File.dirname(__FILE__), '..', 'locale', "#{locale}.rb")  )
     end
     I18n.locale = I18n.default_locale
