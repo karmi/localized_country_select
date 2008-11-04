@@ -50,9 +50,20 @@ module ActionView
       # Return select and option tags for the given object and method, using +localized_country_options_for_select+ 
       # to generate the list of option tags. Uses <b>country code</b>, not name as option +value+.
       # Country codes listed as an array of symbols in +priority_countries+ argument will be listed first
+      # TODO : Implement pseudo-named args with a hash, not the "somebody said PHP?" multiple args sillines
       def localized_country_select(object, method, priority_countries = nil, options = {}, html_options = {})
         InstanceTag.new(object, method, self, options.delete(:object)).
           to_localized_country_select_tag(priority_countries, options, html_options)
+      end
+
+      # Return "named" select and option tags according to given arguments.
+      # Use +selected_value+ for setting initial value
+      # It behaves likes older object-binded brother +localized_country_select+ otherwise
+      # TODO : Implement pseudo-named args with a hash, not the "somebody said PHP?" multiple args sillines
+      def localized_country_select_tag(name, selected_value = nil, priority_countries = nil, html_options = {})
+        content_tag :select,
+                    localized_country_options_for_select(selected_value, priority_countries),
+                    { "name" => name, "id" => name }.update(html_options.stringify_keys)
       end
 
       # Returns a string of option tags for countries according to locale. Supply the country code in upper-case ('US', 'DE') 
