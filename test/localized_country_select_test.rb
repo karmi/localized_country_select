@@ -62,7 +62,7 @@ class LocalizedCountrySelectTest < Test::Unit::TestCase
   def test_localized_countries_array_returns_correctly
     assert_nothing_raised { LocalizedCountrySelect::localized_countries_array() }
     # puts LocalizedCountrySelect::localized_countries_array.inspect
-    I18n.locale = 'en-US'
+    I18n.locale = 'en'
     assert_equal 266, LocalizedCountrySelect::localized_countries_array.size
     assert_equal 'Afghanistan', LocalizedCountrySelect::localized_countries_array.first[0]
     I18n.locale = 'cz'
@@ -72,19 +72,21 @@ class LocalizedCountrySelectTest < Test::Unit::TestCase
 
   def test_priority_countries_returns_correctly_and_in_correct_order
     assert_nothing_raised { LocalizedCountrySelect::priority_countries_array([:TW, :CN]) }
-    I18n.locale = 'en-US'
+    I18n.locale = 'en'
     assert_equal [ ['Taiwan', 'TW'], ['China', 'CN'] ], LocalizedCountrySelect::priority_countries_array([:TW, :CN])
   end
 
   private
 
   def setup
-    ['cz', 'en-US'].each do |locale|
+    ['cz', 'en'].each do |locale|
       # NOTE : Beware, that this is the old way of loading locale for current gem version,
       #        Rails version uses the <tt>I18n.load_path += []</tt> way
+      # I18n.load_path += Dir[ File.join( File.dirname(__FILE__), '..', 'locale', '*.{rb,yml}' ) ]
       I18n.load_translations( File.join(File.dirname(__FILE__), '..', 'locale', "#{locale}.rb")  )
     end
-    I18n.locale = I18n.default_locale
+    # I18n.locale = I18n.default_locale
+    I18n.locale = 'en'
   end
 
 end
