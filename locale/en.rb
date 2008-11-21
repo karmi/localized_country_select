@@ -1,4 +1,4 @@
-{ :'en-US' => {
+{ :en => {
 
     :countries => {
 			:AD => "Andorra",
