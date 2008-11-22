@@ -4,6 +4,7 @@ Rails plugin to provide support for localized <tt><select></tt> menu with countr
 storing country information as country _code_ (eg. 'es'), not _name_ (eg. 'Spain'), in the database.
 
 Uses the Rails internationalization framework (I18n, http://rails-i18n.org) for translating the names of countries.
+Requires Rails 2.2 (released November 21st, 2008) or later versions.
 Country names are loaded from hashes in plugin directory, according to <tt>I18n.locale</tt> value.
 
 You can easily translate country codes in your application like this:
