@@ -48,9 +48,9 @@ namespace :import do
       if row.search("td[@class='n']") && 
          row.search("td[@class='n']").inner_html =~ /^namesterritory$/ && 
          row.search("td[@class='g']").inner_html =~ /^[A-Z]{2}/
-        code   = row.search("td[@class='g']").inner_html
+        code   = row.search("td[@class='g']").inner_text
         code   = code[-code.size, 2]
-        name   = row.search("td[@class='v']").inner_html
+        name   = row.search("td[@class='v']").inner_text
         countries << { :code => code.to_sym, :name => name.to_s }
         print " ... #{name}"
       end
