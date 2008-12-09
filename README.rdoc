@@ -20,7 +20,7 @@ See http://github.com/rails/country_select/tree/master/lib/country_select.rb
 
 == Example
 
-    <%= localized_country_code_select(:user, :country, [], :include_blank => 'Please choose...') %>
+    <%= localized_country_select(:user, :country, [], :include_blank => 'Please choose...') %>
 
 will become:
     

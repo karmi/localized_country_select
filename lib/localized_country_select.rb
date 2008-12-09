@@ -2,7 +2,7 @@
 # 
 # View helper for displaying select list with countries:
 # 
-#     localized_country_code_select(:user, :country)
+#     localized_country_select(:user, :country)
 # 
 # Works just like the default Rails' +country_select+ plugin, but stores countries as
 # country *codes*, not *names*, in the database.
