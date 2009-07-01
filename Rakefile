@@ -2,6 +2,8 @@ require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
 
+load File.join(File.dirname(__FILE__), 'tasks', 'localized_country_select_tasks.rake')
+
 desc 'Default: run unit tests.'
 task :default => :test
 
