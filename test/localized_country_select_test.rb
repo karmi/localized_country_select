@@ -84,6 +84,11 @@ class LocalizedCountrySelectTest < Test::Unit::TestCase
     assert_equal [ ['Taiwan', 'TW'], ['China', 'CN'] ], LocalizedCountrySelect::priority_countries_array([:TW, :CN])
   end
 
+  def test_priority_countries_allows_passing_either_symbol_or_string
+    I18n.locale = 'en'
+    assert_equal [ ['United States', 'US'], ['Canada', 'CA'] ], LocalizedCountrySelect::priority_countries_array(['US', 'CA'])
+  end
+
   private
 
   def setup
