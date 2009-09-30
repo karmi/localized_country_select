@@ -9,6 +9,12 @@ require 'action_view/helpers'
 require 'action_view/helpers/tag_helper'
 require 'i18n'
 
+begin
+  require 'redgreen'
+rescue LoadError
+  puts "[!] Install redgreen gem for better test output ($ sudo gem install redgreen)"
+end unless ENV["TM_FILEPATH"]
+
 require 'localized_country_select'
 
 class LocalizedCountrySelectTest < Test::Unit::TestCase
