@@ -43,7 +43,7 @@ class LocalizedCountrySelectTest < Test::Unit::TestCase
     # puts localized_country_select_tag( "competition_submission[data][citizenship]", nil)
     assert localized_country_select_tag( "competition_submission[data][citizenship]", nil) =~
               Regexp.new(
-              Regexp.escape('<select id="competition_submission[data][citizenship]" name="competition_submission[data][citizenship]">') ),
+              Regexp.escape('<select id="competition_submission_data_citizenship" name="competition_submission[data][citizenship]">') ),
               "Should have proper name"
   end
 
