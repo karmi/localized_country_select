@@ -89,6 +89,12 @@ class LocalizedCountrySelectTest < Test::Unit::TestCase
     assert_equal [ ['United States', 'US'], ['Canada', 'CA'] ], LocalizedCountrySelect::priority_countries_array(['US', 'CA'])
   end
 
+  def test_priority_countries_allows_passing_upcase_or_lowercase
+    I18n.locale = 'en'
+    assert_equal [ ['United States', 'US'], ['Canada', 'CA'] ], LocalizedCountrySelect::priority_countries_array(['us', 'ca'])
+    assert_equal [ ['United States', 'US'], ['Canada', 'CA'] ], LocalizedCountrySelect::priority_countries_array([:us, :ca])
+  end
+
   private
 
   def setup
