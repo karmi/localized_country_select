@@ -5,6 +5,7 @@ require 'active_support'
 require 'action_controller'
 require 'action_controller/test_process'
 require 'action_view'
+require 'action_view/helpers'
 require 'action_view/helpers/tag_helper'
 require 'i18n'
 
@@ -12,8 +13,9 @@ require 'localized_country_select'
 
 class LocalizedCountrySelectTest < Test::Unit::TestCase
 
-  include ActionView::Helpers::FormOptionsHelper
   include ActionView::Helpers::TagHelper
+  include ActionView::Helpers::FormOptionsHelper
+  include ActionView::Helpers::FormTagHelper
 
   def test_action_view_should_include_helper_for_object
     assert ActionView::Helpers::FormBuilder.instance_methods.include?('localized_country_select')
