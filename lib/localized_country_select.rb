@@ -23,7 +23,8 @@ module LocalizedCountrySelect
     # Returns array with codes and localized country names (according to <tt>I18n.locale</tt>)
     # for <tt><option></tt> tags
     def localized_countries_array
-      I18n.translate(:countries).map { |key, value| [value, key.to_s.upcase] }.sort
+      I18n.translate(:countries).map { |key, value| [value, key.to_s.upcase] }.
+                                 sort_by { |country| country.first.parameterize }
     end
     # Return array with codes and localized country names for array of country codes passed as argument
     # == Example

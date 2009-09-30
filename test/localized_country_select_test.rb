@@ -95,6 +95,11 @@ class LocalizedCountrySelectTest < Test::Unit::TestCase
     assert_equal [ ['United States', 'US'], ['Canada', 'CA'] ], LocalizedCountrySelect::priority_countries_array([:us, :ca])
   end
 
+  def test_should_list_countries_with_accented_names_in_correct_order
+    I18n.locale = 'cz'
+    assert_match Regexp.new(Regexp.escape(%Q{<option value="BI">Burundi</option>\n<option value="TD">Čad</option>})), localized_country_select(:user, :country)
+  end
+
   private
 
   def setup
