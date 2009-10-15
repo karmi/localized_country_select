@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'hpricot'
 require 'open-uri'
 
 # Rake task for importing country names from Unicode.org's CLDR repository
@@ -21,6 +20,12 @@ namespace :import do
 
   desc "Import country codes and names for various languages from the Unicode.org CLDR archive. Depends on Hpricot gem."
   task :country_select do
+    begin
+      require 'hpricot'
+    rescue LoadError
+      puts "Error: Hpricot library required to use this task (import:country_select)"
+      exit
+    end
     
     # TODO : Implement locale import chooser from CLDR root via Highline
     
