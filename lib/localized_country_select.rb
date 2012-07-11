@@ -63,7 +63,7 @@ module ActionView
       # as +selected+ to have it marked as the selected option tag.
       # Country codes listed as an array of symbols in +priority_countries+ argument will be listed first
       def localized_country_options_for_select(selected = nil, priority_countries = nil)
-        country_options = ""
+        country_options = "".html_safe
         if priority_countries
           country_options += options_for_select(LocalizedCountrySelect::priority_countries_array(priority_countries), selected)
           country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n"
